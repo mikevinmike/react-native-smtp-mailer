@@ -60,6 +60,7 @@ public class RNSmtpMailerModule extends ReactContextBaseJavaModule {
             String subject = obj.getString("subject");
             String body = obj.getString("htmlBody");
 
+            String from = obj.hasKey("from") ? obj.getString("from") : username;
             String fromName = obj.hasKey("fromName") ? obj.getString("fromName") : username;
             String replyToAddress = obj.hasKey("replyTo") ? obj.getString("replyTo") : username;
             ReadableArray bcc = obj.hasKey("bcc") ? obj.getArray("bcc") : null;
@@ -71,7 +72,7 @@ public class RNSmtpMailerModule extends ReactContextBaseJavaModule {
             public void run() {
                 try {
                     MailSender sender = new MailSender(username, password, mailhost, port, ssl);
-                    sender.sendMail(subject, body, username, fromName, replyToAddress, recipients, bcc, attachmentPaths, attachmentNames);
+                    sender.sendMail(subject, body, from, fromName, replyToAddress, recipients, bcc, attachmentPaths, attachmentNames);
 
                     WritableMap success = new WritableNativeMap();
                     success.putString("status", "SUCCESS");

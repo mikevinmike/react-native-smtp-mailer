@@ -1,7 +1,6 @@
+import {NativeModules} from 'react-native';
 
-import { NativeModules } from 'react-native';
-
-const { RNSmtpMailer } = NativeModules;
+const {RNSmtpMailer} = NativeModules;
 
 export interface SmtpOptions {
     /**
@@ -27,9 +26,9 @@ export interface SmtpOptions {
     /**
      * Comma separated values if want to add multiple recipients
      * i.e: "foo@bar.com,bar@foo.com"
-     */ 
-    recipients: string; 
-    
+     */
+    recipients: string;
+
     /**
      * The subject of the email
      */
@@ -41,6 +40,13 @@ export interface SmtpOptions {
      * <h1>Sample Header</h1><p>Lorem ipsum dolor sit amet...</p>
      */
     htmlBody: string;
+
+    /**
+     * Email address of the sender.
+     * By default it's the same as the username field
+     * i.e: "foo.alias@foobar.com"
+     */
+    from?: string;
 
     /**
      * Alias of the username email address, to be shown in the recipients as the sender's name.
@@ -58,9 +64,9 @@ export interface SmtpOptions {
 
     /**
      * In iOS TLS/SSL is determined automatically, so either true or false, it doesn't affect it
-     * 
+     *
      * By default it is true in android. If false then TLS is enabled.
-     */ 
+     */
     ssl?: boolean;
 
     /**
