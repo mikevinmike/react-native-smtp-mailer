@@ -33,6 +33,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.PreencodedMimeBodyPart;
 
 public class RNSmtpMailerModule extends ReactContextBaseJavaModule {
 
@@ -158,12 +159,23 @@ class MailSender extends javax.mail.Authenticator {
 
         if (attachmentPaths != null && attachmentPaths.size() > 0) {
             for (int i = 0; i < attachmentPaths.size(); i++) {
-                messageBodyPart = new MimeBodyPart();
-                DataSource source = new FileDataSource(attachmentPaths.getString(i));
-                messageBodyPart.setDataHandler(new DataHandler(source));
-                if (attachmentNames != null && attachmentNames.size() > i) {
-                    messageBodyPart.setFileName(attachmentNames.getString(i));
+                String path = attachmentPaths.getString(i);
+                final String DATA_SCHEME = "data:";
+                final String DATA_URI_CONTENT_BEGIN = ";base64,";
+                if (path.startsWith(DATA_SCHEME)) {
+                    messageBodyPart = new PreencodedMimeBodyPart("base64");
+                    int base64Index = path.indexOf(DATA_URI_CONTENT_BEGIN);
+                    String mimeType = path.substring(DATA_SCHEME.length(), base64Index);
+                    String content = path.substring(base64Index + DATA_URI_CONTENT_BEGIN.length());
+                    messageBodyPart.setContent( content, mimeType );
+                } else {
+                    messageBodyPart = new MimeBodyPart();
+                    DataSource source = new FileDataSource(path);
+                    messageBodyPart.setDataHandler(new DataHandler(source));
                 }
+                 if (attachmentNames != null && attachmentNames.size() > i) {
+                    messageBodyPart.setFileName(attachmentNames.getString(i));
+                 }
                 messageBodyPart.setHeader("Content-ID", "<content_id_" + String.valueOf(i) + ">");
                 _multipart.addBodyPart(messageBodyPart);
             }

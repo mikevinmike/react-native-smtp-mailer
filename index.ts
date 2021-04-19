@@ -1,7 +1,6 @@
+import {NativeModules} from 'react-native';
 
-import { NativeModules } from 'react-native';
-
-const { RNSmtpMailer } = NativeModules;
+const {RNSmtpMailer} = NativeModules;
 
 export interface SmtpOptions {
     /**
@@ -27,9 +26,9 @@ export interface SmtpOptions {
     /**
      * Comma separated values if want to add multiple recipients
      * i.e: "foo@bar.com,bar@foo.com"
-     */ 
-    recipients: string; 
-    
+     */
+    recipients: string;
+
     /**
      * The subject of the email
      */
@@ -58,9 +57,9 @@ export interface SmtpOptions {
 
     /**
      * In iOS TLS/SSL is determined automatically, so either true or false, it doesn't affect it
-     * 
+     *
      * By default it is true in android. If false then TLS is enabled.
-     */ 
+     */
     ssl?: boolean;
 
     /**
@@ -72,6 +71,7 @@ export interface SmtpOptions {
     /**
      * Optional path URIs of files that exist to the filesystem in the specified path, and want to be send as attachments
      * i.e: [RNFS.DocumentDirectoryPath + "/sample_test.txt"]
+     * i.e: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII="]
      */
     attachmentPaths?: Array<string>;
 
