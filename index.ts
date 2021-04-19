@@ -78,6 +78,7 @@ export interface SmtpOptions {
     /**
      * Optional path URIs of files that exist to the filesystem in the specified path, and want to be send as attachments
      * i.e: [RNFS.DocumentDirectoryPath + "/sample_test.txt"]
+     * i.e: ["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII="]
      */
     attachmentPaths?: Array<string>;
 
