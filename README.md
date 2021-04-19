@@ -87,7 +87,8 @@ RNSmtpMailer.sendMail({
     RNFS.DocumentDirectoryPath + "/test2.csv",
     RNFS.DocumentDirectoryPath + "/pdfFile.pdf",
     RNFS.DocumentDirectoryPath + "/zipFile.zip",
-    RNFS.DocumentDirectoryPath + "/image.png"
+    RNFS.DocumentDirectoryPath + "/image.png", 
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII="
   ], // optional
   attachmentNames: [
     "image.jpg",
